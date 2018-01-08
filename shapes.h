@@ -20,6 +20,7 @@
 #define  shapes_INC
 #include<vector>
 #include<opencv2/core/core.hpp>
+#include<opencv2/imgproc/imgproc.hpp>
 void init_std_shapes(std::vector< std::vector<cv::Point> >&standardShapes);
 int whatShapeIs(std::vector< std::vector<cv::Point>  >&standardShapes,std::vector<cv::Point> contour,float* val);
 cv::Point contourCentre(std::vector<cv::Point> contour);
