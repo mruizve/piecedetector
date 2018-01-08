@@ -10,14 +10,9 @@ else(OpenCV_FOUND )
 	message( FATAL_ERROR "PB->OPENCV = ${OpenCV_INCLUDE_DIRS}" )
 endif( OpenCV_FOUND )
 
-# Dediche method for edge detection
-#file( GLOB Dediche_SRCS dediche.cpp shapes.cpp )
-#add_executable( dediche ${Dediche_SRCS} )
-#target_link_libraries( dediche ${OpenCV_LIBS} )
+include_directories( "${CMAKE_CURRENT_SOURCE_DIR}/include" )
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin" )
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib" )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib" )
 
-# Manuel method
-file( GLOB Main_SRCS main.cpp shapes.cpp )
-add_executable( detector ${Main_SRCS} )
-target_link_libraries( detector ${OpenCV_LIBS} )
-
-
+subdirs( src )

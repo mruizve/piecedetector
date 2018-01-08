@@ -9,14 +9,17 @@
 //#include<unistd.h>
 //#include"shapes.h"
 
-#include<opencv2/highgui/highgui.hpp>
-#include<opencv2/core/core_c.h>
-#include "shapes.h"
-#include "opencv2/core/ocl.hpp"
-#include<opencv2/imgproc/imgproc.hpp>
 #include<pthread.h>
 #include<iostream>
 #include<unistd.h>
+#if 2<CV_MAJOR_VERSION
+	#error add OpenCV 3 headers
+#else
+	#include<opencv2/highgui/highgui.hpp>
+	#include<opencv2/ocl/ocl.hpp>
+	#include<opencv2/imgproc/imgproc.hpp>
+#endif
+#include "shapes.h"
 
 using namespace cv;
 

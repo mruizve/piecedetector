@@ -1,4 +1,6 @@
+bin/*
 build/*
+lib/*
 CMakeFiles/*
 .*.swp
 Makefile
