@@ -14,12 +14,26 @@ namespace cv
 	typedef std::vector<cv::Vec4i> Lines;
 };
 
-int main(int aegc, char *argv[])
+int main(int argc, char *argv[])
 {
-	std::string window_name("pieces detector");
-    cv::namedWindow(window_name,cv::WINDOW_AUTOSIZE);
+	// validate input arguments
+	if( 2!=argc )
+	{
+		std::cout << "usage: " << argv[0] << " input_image" << std::endl;
+		return -1;
+	}
 
-	cv::Mat img=cv::imread("../source2.jpg",cv::IMREAD_GRAYSCALE);
+	// load image
+	cv::Mat img=cv::imread(argv[1],cv::IMREAD_GRAYSCALE);
+	if( !img.data )
+    {
+        std::cout << "[error] \"" << argv[1] << "\" is not a valid input image" << std::endl;
+        return -1;
+    }
+
+	// create visualization window
+	std::string window_name(argv[0]);
+    cv::namedWindow(window_name,cv::WINDOW_AUTOSIZE);
 
 	// work in progress...
 
