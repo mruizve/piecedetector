@@ -26,14 +26,14 @@ int main(int argc, char *argv[])
 	// load image
 	cv::Mat img=cv::imread(argv[1],cv::IMREAD_GRAYSCALE);
 	if( !img.data )
-    {
-        std::cout << "[error] \"" << argv[1] << "\" is not a valid input image" << std::endl;
-        return -1;
-    }
+	{
+		std::cout << "[error] \"" << argv[1] << "\" is not a valid input image" << std::endl;
+		return -1;
+	}
 
 	// create visualization window
 	std::string window_name(argv[0]);
-    cv::namedWindow(window_name,cv::WINDOW_AUTOSIZE);
+	cv::namedWindow(window_name,cv::WINDOW_AUTOSIZE);
 
 	// work in progress...
 
