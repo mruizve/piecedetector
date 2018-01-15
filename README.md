@@ -14,7 +14,7 @@ cd piecedetector
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
-make
+make -j$(nproc)
 ```
 
 #### how to use
