@@ -40,6 +40,5 @@ void Operator::importConfig(cv::FileStorage& _xml)
 	for( size_t i=0; p_.size()>i; i++ )
 	{
 		p_[i].val=(double)node[p_[i].name];
-		i++;
 	}
 }
