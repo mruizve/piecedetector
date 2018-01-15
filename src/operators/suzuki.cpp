@@ -3,7 +3,7 @@
 // parameters data
 static const cv::Parameters p[]=
 {
-	{5000,250,"min_length"}
+	{5000,250,"min_length"} // minimum number of points in the contour
 };
 
 Suzuki::Suzuki(void)
