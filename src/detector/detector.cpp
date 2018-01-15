@@ -44,8 +44,8 @@ void PieceDetector::imageOperator(Operator* _operator, const cv::Mat& _src, cv::
 {
 	if( gui_ )
 	{
-		cv::namedWindow(wname_);
-		_operator->gui(wname_);
+		cv::namedWindow(wname_+" gui",CV_WINDOW_NORMAL|CV_WINDOW_KEEPRATIO);
+		_operator->gui(wname_+" gui");
 
 		cv::Mat aux;
 		for( char c=0; 0x1b!=c; c=cv::waitKey(30) )
@@ -55,7 +55,7 @@ void PieceDetector::imageOperator(Operator* _operator, const cv::Mat& _src, cv::
 		}
 		aux.copyTo(_dst);
 
-		cv::destroyWindow(wname_);
+		cv::destroyWindow(wname_+" gui");
 	}
 	else
 	{
@@ -109,8 +109,8 @@ void PieceDetector::suzuki(const cv::Mat& _src, cv::Contours& _contours, cv::Hie
 
 	if( gui_ )
 	{
-		cv::namedWindow(wname_);
-		suzuki_.gui(wname_);
+		cv::namedWindow(wname_+" gui",CV_WINDOW_NORMAL|CV_WINDOW_KEEPRATIO);
+		suzuki_.gui(wname_+" gui");
 
 		for( char c=0; 0x1b!=c; c=cv::waitKey(30) )
 		{
@@ -125,7 +125,7 @@ void PieceDetector::suzuki(const cv::Mat& _src, cv::Contours& _contours, cv::Hie
 			cv::imshow(wname_,aux);
 		}
 
-		cv::destroyWindow(wname_);
+		cv::destroyWindow(wname_+" gui");
 	}
 	else
 	{
@@ -154,9 +154,9 @@ void PieceDetector::lines(const cv::Mat& _src, cv::Lines& _lines)
 
 	if( gui_ )
 	{
-		cv::namedWindow(wname_);
-		hough_.gui(wname_);
-		lines_.gui(wname_);
+		cv::namedWindow(wname_+" gui",CV_WINDOW_NORMAL|CV_WINDOW_KEEPRATIO);
+		hough_.gui(wname_+" gui");
+		lines_.gui(wname_+" gui");
 
 		for( char c=0; 0x1b!=c; c=cv::waitKey(30) )
 		{
@@ -176,7 +176,7 @@ void PieceDetector::lines(const cv::Mat& _src, cv::Lines& _lines)
 			cv::imshow(wname_,aux);
 		}
 
-		cv::destroyWindow(wname_);
+		cv::destroyWindow(wname_+" gui");
 	}
 	else
 	{

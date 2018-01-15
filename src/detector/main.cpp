@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
 	// create visualization window
 	std::string wname(detector->windowName());
-	cv::namedWindow(wname,cv::WINDOW_AUTOSIZE);
+	cv::namedWindow(wname,CV_WINDOW_AUTOSIZE|CV_WINDOW_KEEPRATIO);
 
 	// show original image
 	do
