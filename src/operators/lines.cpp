@@ -4,9 +4,10 @@
 // parameters data
 static const cv::Parameters p[]=
 {
-	{1,1,"merging"},
-	{100,90,"min_angle"},
-	{100,5,"max_error"}
+	{1,1,"merging"},  // enable/disable flag
+	{100,90,"angle"}, // minimum alignment between lines
+	{100,5,"error"},  // maximum error (in pixels)
+	{250,35,"length"} // minimum line length (in pixels)
 };
 
 Lines::Lines(void)
@@ -37,6 +38,7 @@ void Lines::apply(const cv::Lines& _src, cv::Lines& _dst)
 
 	double min_angle=p_[1].val/100.0;
 	double max_error=p_[2].val;
+	double min_length=p_[3].val;
 
 	cv::Lines aux=cv::Lines(_src);
 	_dst.clear();
@@ -130,7 +132,11 @@ void Lines::apply(const cv::Lines& _src, cv::Lines& _dst)
 			p2=pb;
 		}
 
-		// add line to the array
-		_dst.push_back(cv::Line(p1(0),p1(1),p2(0),p2(1)));
+		// if the line long enough, then
+		if( min_length<(p2-p1).norm() )
+		{
+			// add line to the array
+			_dst.push_back(cv::Line(p1(0),p1(1),p2(0),p2(1)));
+		}
 	}
 }
