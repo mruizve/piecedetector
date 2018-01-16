@@ -132,7 +132,7 @@ void Lines::apply(const cv::Lines& _src, cv::Lines& _dst)
 			p2=pb;
 		}
 
-		// if the line long enough, then
+		// if the line is long enough, then
 		if( min_length<(p2-p1).norm() )
 		{
 			// add line to the array
