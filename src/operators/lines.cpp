@@ -54,7 +54,7 @@ void Lines::apply(const cv::Lines& _src, cv::Lines& _dst)
 		// "first" line in homogeneous coordinates
 		Eigen::Vector3d l1=p.cross(q); l1/=l1(2);
 
-		// add points of the "first" line to the cluster
+		// add points of the "first" line to the array
 		points.push_back(p);
 		points.push_back(q);
 		
