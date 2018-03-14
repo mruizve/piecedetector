@@ -1,5 +1,5 @@
 # Dediche method for edge detection
-#subdirs( dediche )
+#subdirs( deriche )
 
 # filters library
 subdirs( operators )
