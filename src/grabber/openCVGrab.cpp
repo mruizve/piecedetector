@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     try
     {
-			// Create an instant camera object with the camera device found first.
+		// Create an instant camera object with the camera device found first.
 		std::cout << "Creating Camera..." << std::endl;
 		Pylon::CInstantCamera camera(Pylon::CTlFactory::GetInstance().CreateFirstDevice());
 
