@@ -1,8 +1,5 @@
 bin/*
 build/*
+data/*
 lib/*
-CMakeFiles/*
 .*.swp
-Makefile
-CMakeCache.txt
-*.cmake
