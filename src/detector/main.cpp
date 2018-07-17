@@ -57,13 +57,13 @@ int main(int argc, char *argv[])
 	detector->blurring(raw,img);
 
 	// image binarization
-	detector->binarization(img,img);
+	//detector->binarization(img,img);
 
 	// morphological opening of the binary image
-	detector->opening(img,img);
+	//detector->opening(img,img);
 
 	// border removal (to avoid failures during contours detection)
-	detector->borderRemoval(img,img);
+	//detector->borderRemoval(img,img);
 
 	// edges detection
 	cv::Mat edges;
@@ -77,17 +77,21 @@ int main(int argc, char *argv[])
 	cv::Hierarchy hierarchy;
 	detector->suzuki(edges,contours,hierarchy);
 
+	cv::Shapes shapes;
+	detector->shapes(edges,contours,shapes);
+
+/*
 	for( cv::Contours::iterator it=contours.begin(); contours.end()!=it; it++ )
 	{
 		// generate shape image
 		cv::Mat piece(edges.rows,edges.cols,edges.depth(),cv::Scalar(0));
-		cv::drawContours(piece,contours,(int)(it-contours.begin()),cv::Scalar(255),2,8,hierarchy,0,cv::Point());
+		cv::drawContours(piece,contours,(int)(it-contours.begin()),cv::Scalar(255),CV_FILLED,8,hierarchy,0,cv::Point());
 
 		// detect lines
 		cv::Lines lines;
 		detector->lines(piece,lines);
 	}
-
+*/
 	delete detector;
 	
 	return 0;

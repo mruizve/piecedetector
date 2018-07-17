@@ -25,6 +25,9 @@ class PieceDetector: public Operator
 		// lines detection and clustering
 		void lines(const cv::Mat& _src, cv::Lines& _dst);
 
+		// shapes recognition
+		void shapes(const cv::Mat& _src, const cv::Contours& _contours, cv::Shapes& _dst);
+
 		// configuration parameters
 		void exportConfig(cv::FileStorage& xml);
 		void importConfig(cv::FileStorage& xml);
@@ -58,6 +61,9 @@ class PieceDetector: public Operator
 		// lines detection and grouping
 		Hough hough_;
 		Lines lines_;
+
+		// shapes
+		Rectangle rectangle_;
 };
 
 #endif

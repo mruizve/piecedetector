@@ -95,4 +95,13 @@ class Lines: public Operator
 		void apply(const cv::Lines&, cv::Lines&);
 };
 
+// shape analysis
+class Rectangle: public Operator
+{
+	public:
+		Rectangle(void);
+		~Rectangle(void);
+		void apply(const cv::Mat&, cv::Shape&);
+};
+
 #endif

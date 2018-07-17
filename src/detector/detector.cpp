@@ -199,6 +199,108 @@ void PieceDetector::lines(const cv::Mat& _src, cv::Lines& _lines)
 	}
 }
 
+void PieceDetector::shapes(const cv::Mat& _src, const cv::Contours& _contours, cv::Shapes& _dst)
+{
+	cv::Mat aux(_src.rows,_src.cols,CV_8UC3);
+
+	if( gui_ )
+	{
+		cv::namedWindow(wname_+" gui",CV_WINDOW_NORMAL|CV_WINDOW_KEEPRATIO);
+		rectangle_.gui(wname_+" gui");
+
+		for( char c=0; 0x1b!=c; c=cv::waitKey(30) )
+		{
+			// shapes initialization (empty)
+			_dst.clear();
+
+			// clear preview image
+			aux=cv::Scalar(0,0,0);
+
+			// for each contour,
+			for( cv::Contours::const_iterator it=_contours.begin(); _contours.end()!=it; it++ )
+			{
+				// extract contour shape
+				cv::Shape shape;
+				rectangle_.apply(cv::Mat(*it),shape);
+
+				// if the shape was found,
+				if( 0<=shape.type )
+				{
+					// store contour shape
+					_dst.push_back(shape);
+				}
+
+				// draw contour
+				cv::drawContours(aux,_contours,(int)(it-_contours.begin()),cv::Scalar(255,255,255),CV_FILLED,CV_AA);
+
+				// if the shape was found,
+				if( 0<=shape.type )
+				{
+					// draw shape
+					float dx=60.0f*cosf(shape.theta);
+					float dy=60.0f*sinf(shape.theta);
+					cv::line(aux,shape.center,shape.center+cv::Point(dx,dy),cv::Scalar(0,0,255),3,CV_AA);
+					cv::line(aux,shape.center,shape.center-cv::Point(-dy,+dx),cv::Scalar(0,255,0),3,CV_AA);
+					cv::circle(aux,shape.center,5.0f,cv::Scalar(255,0,0),1,CV_AA);
+				}
+			}
+
+			cv::imshow(wname_,aux);
+		}
+
+		cv::destroyWindow(wname_+" gui");
+	}
+	else
+	{
+		// shapes initialization (empty)
+		_dst.clear();
+
+		if( verbose_ )
+		{
+			// clear preview image
+			aux=cv::Scalar(0,0,0);
+		}
+
+		// for each contour,
+		for( cv::Contours::const_iterator it=_contours.begin(); _contours.end()!=it; it++ )
+		{
+			// extract contour shape
+			cv::Shape shape;
+			rectangle_.apply(cv::Mat(*it),shape);
+
+			// if the shape was found,
+			if( 0<=shape.type )
+			{
+				// store contour shape
+				_dst.push_back(shape);
+			}
+
+
+			if( verbose_ )
+			{
+				// draw contour
+				cv::drawContours(aux,_contours,(int)(it-_contours.begin()),cv::Scalar(255,255,255),CV_FILLED,CV_AA);
+
+				// if the shape was found,
+				if( 0<=shape.type )
+				{
+					// draw shape
+					float dx=60.0f*cosf(shape.theta);
+					float dy=60.0f*sinf(shape.theta);
+					cv::line(aux,shape.center,shape.center+cv::Point(dx,dy),cv::Scalar(0,0,255),3,CV_AA);
+					cv::line(aux,shape.center,shape.center-cv::Point(-dy,+dx),cv::Scalar(0,255,0),3,CV_AA);
+					cv::circle(aux,shape.center,5.0f,cv::Scalar(255,0,0),1,CV_AA);
+				}
+			}
+		}
+		
+		for( char c=0; 0x1b!=c; c=cv::waitKey(30) )
+		{
+			cv::imshow(wname_,aux);
+		}
+	}
+}
+
 // export configuration parameters
 void PieceDetector::exportConfig(cv::FileStorage& xml)
 {
@@ -215,6 +317,7 @@ void PieceDetector::exportConfig(cv::FileStorage& xml)
 	suzuki_.exportConfig(xml);
 	hough_.exportConfig(xml);
 	lines_.exportConfig(xml);
+	rectangle_.exportConfig(xml);
 }
 
 // import configuration parameters
@@ -233,6 +336,7 @@ void PieceDetector::importConfig(cv::FileStorage& xml)
 	suzuki_.importConfig(xml);
 	hough_.importConfig(xml);
 	lines_.importConfig(xml);
+	rectangle_.importConfig(xml);
 }
 
 const std::string& PieceDetector::windowName(void)

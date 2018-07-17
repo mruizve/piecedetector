@@ -21,6 +21,14 @@ namespace cv
 		int val;          // value
 		std::string name; // name
 	};
+
+	struct Shape
+	{
+		int type;         // shape type
+		double theta;     // frame/shape orientation
+		cv::Point center; // frame origin
+	};
+	typedef std::vector<cv::Shape> Shapes;
 };
 
 #endif
