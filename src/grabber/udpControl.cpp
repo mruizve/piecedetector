@@ -69,9 +69,7 @@ int main(int argc, char *argv[])
 	socklen_t serverlen = sizeof(server);
 	while( std::getline(std::cin, cmd) )
 	{
-		cmd = cmd + '\r';
-
-		if( 0>sendto(sd, cmd.c_str(), cmd.length(), 0, (struct sockaddr*) &server, serverlen) )
+		if( 0>sendto(sd, (cmd+'\r').c_str(), cmd.length()+1, 0, (struct sockaddr*) &server, serverlen) )
 		{
 			close(sd);
 			std::cerr << "[" << argv[0] << ":EE] " << "cannot send command \"" << cmd.c_str() << "\"" << std::endl;
@@ -85,7 +83,7 @@ int main(int argc, char *argv[])
 			std::cerr << "[" << argv[0] << ":EE] " << "cannot receive echo of command \"" << cmd.c_str() << "\"" << std::endl;
 			return -1;
         }
-        char *cr=strrchr(echo,0x0d);
+        char *cr=strrchr(echo,'\r');
         cr[0] = ';';
         cr[1] = ' ';
 

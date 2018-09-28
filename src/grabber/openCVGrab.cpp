@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+	// create frames directory (if not exists)
 	struct stat st = {0};
 	if( 0>stat(argv[1], &st) )
 	{
