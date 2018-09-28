@@ -11,6 +11,7 @@
 
 int main(int argc, char *argv[])
 {
+	// validate input command line arguments
 	if( 3 != argc )
 	{
 		std::cout << "usage: " << argv[0] << " ip port" << std::endl;
@@ -83,9 +84,7 @@ int main(int argc, char *argv[])
 			std::cerr << "[" << argv[0] << ":EE] " << "cannot receive echo of command \"" << cmd.c_str() << "\"" << std::endl;
 			return -1;
         }
-        char *cr=strrchr(echo,'\r');
-        cr[0] = ';';
-        cr[1] = ' ';
+        strrchr(echo,'\r')[0] = ':';
 
         std::cout << echo << std::endl;
 	}
