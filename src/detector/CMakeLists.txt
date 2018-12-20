@@ -1,7 +1,18 @@
-file( GLOB Detect_SRCS detector.cpp )
-add_library( detect SHARED ${Detect_SRCS} )
-target_link_libraries( detect operators ${OpenCV_LIBS} )
+# tetrominoes detection library
+add_library( tetrominoes SHARED
+	detector.cpp
+	operators/binary.cpp
+	operators/blurring.cpp
+	operators/border.cpp
+	operators/canny.cpp
+	operators/hough.cpp
+	operators/lines.cpp
+	operators/morphological.cpp
+	operators/operator.cpp
+	operators/rectangle.cpp
+	operators/suzuki.cpp )
+target_link_libraries( tetrominoes ${OpenCV_LIBS} )
 
-file( GLOB Main_SRCS main.cpp )
-add_executable( detector ${Main_SRCS} )
-target_link_libraries( detector detect ${OpenCV_LIBS} )
+# tetrominoes detector example
+add_executable( detector main.cpp )
+target_link_libraries( detector tetrominoes ${OpenCV_LIBS} )

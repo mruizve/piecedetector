@@ -1,11 +1,17 @@
-# Dediche method for edge detection
+#deriche method for edge detection
 #subdirs( deriche )
 
-# filters library
-subdirs( operators )
-
-# pieces/shapes detector 
+# pieces/shapes detectors
 subdirs( detector )
+
+# flexibowl library
+subdirs( flexibowl )
 
 # image grabber (from blaster camera)
 subdirs( grabber )
+
+# network library
+subdirs( network )
+
+# utils library
+subdirs( utils )
